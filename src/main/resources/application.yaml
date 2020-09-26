@@ -9,3 +9,5 @@ spring:
               facebook:
                 clientId: 798378130976883
                 clientSecret: 67f5e21d8cab6023471a84a8d139627c
+portalTransparencia:
+    api: 71b0aea3225732b569c74a440bbcde0b
