@@ -1,5 +1,6 @@
 package com.rcbrasileiro.demosso.web.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,17 @@ public class Controller {
 	@Autowired
 	private IPortalTransparenciaService portalTransparenciaService;
 
+	/*
+	 * @GetMapping("/") public ResponseEntity<List<AcordoLenienciaDto>> helloWord()
+	 * { List<AcordoLenienciaDto> acordos = portalTransparenciaService
+	 * .listAcordosLenciencia(portalTransparenciaConfig.getKeyAPI()); return
+	 * ResponseEntity.ok(acordos); }
+	 */
+	
 	@GetMapping("/")
-	public ResponseEntity<List<AcordoLenienciaDto>> helloWord() {
-		List<AcordoLenienciaDto> acordos = portalTransparenciaService
-				.listAcordosLenciencia(portalTransparenciaConfig.getKeyAPI());
-		return ResponseEntity.ok(acordos);
-	}
+	 public Principal user(Principal principal) {
+	        return principal;
+	    }
 
 	@GetMapping("/restricted")
 	public String restricted() {
