@@ -12,12 +12,11 @@ import java.io.Serializable;
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 
-    @Override
+	private static final long serialVersionUID = 4722485650675527905L;
+
+	@Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
-    	System.out.println("");
-
-        //response.sendRedirect("/oauth2/authorization/google");
     }
 }
