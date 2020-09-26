@@ -11,5 +11,7 @@ public interface IUserService {
 	public Optional<User> findByEmail(String email);
 	
 	public User save(User user);
+	
+	public User getUser();
 
 }

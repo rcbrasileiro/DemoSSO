@@ -29,6 +29,6 @@ public class UserDetailService implements UserDetailsService {
     }
 
     private List<SimpleGrantedAuthority> getAuthority() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 }

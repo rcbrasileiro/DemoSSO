@@ -1,4 +1,4 @@
-package com.rcbrasileiro.demosso.security.config;
+package com.rcbrasileiro.demosso.security.filter;
 
 import static com.rcbrasileiro.demosso.common.Constants.*;
 
@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
-		String token = req.getParameter(TOKEN_PARAM);
+		String token = req.getHeader(TOKEN_PARAM);
 		String username = null;
 		if (token != null) {
 			try {

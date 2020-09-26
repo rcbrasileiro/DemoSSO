@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.rcbrasileiro.demosso.domain.util.UserType;
 
 @Entity
@@ -31,9 +33,16 @@ public class User {
 	private UserType userType;
 
 	@Column
-	private String password;
+	private String password = "";
 
 	public User() {
+		
+	}	
+
+	public User(String name, String email, String imageUrl) {
+		this.name = name;
+		this.email = email;
+		this.imageUrl = imageUrl;
 	}
 
 	public void setUserTypeGoogle() {
@@ -84,6 +93,7 @@ public class User {
 		this.userType = userType;
 	}
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	public String getPassword() {
 		return password;
 	}

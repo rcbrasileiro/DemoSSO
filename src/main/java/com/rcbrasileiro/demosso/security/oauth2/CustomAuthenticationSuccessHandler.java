@@ -1,8 +1,14 @@
 package com.rcbrasileiro.demosso.security.oauth2;
 
-import com.rcbrasileiro.demosso.domain.User;
-import com.rcbrasileiro.demosso.service.IUserService;
-import com.rcbrasileiro.demosso.util.JwtTokenUtil;
+import static com.rcbrasileiro.demosso.common.Constants.TOKEN_PARAM;
+
+import java.io.IOException;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,14 +17,10 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Optional;
-
-import static com.rcbrasileiro.demosso.common.Constants.homeUrl;
+import com.rcbrasileiro.demosso.config.FrontEndConfig;
+import com.rcbrasileiro.demosso.domain.User;
+import com.rcbrasileiro.demosso.service.IUserService;
+import com.rcbrasileiro.demosso.util.JwtTokenUtil;
 
 @Component
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -28,6 +30,9 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
+	
+	@Autowired
+	private FrontEndConfig frontEndConfig;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -40,9 +45,8 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		String email = (String) attributes.get("email");
 		Optional<User> userOpt = this.userService.findByEmail(email);
 		String token = jwtTokenUtil.generateToken(userOpt.get());
-		String redirectionUrl = UriComponentsBuilder.fromUriString(homeUrl).queryParam("auth_token", token).build()
+		String redirectionUrl = UriComponentsBuilder.fromUriString(frontEndConfig.getUrl()).queryParam(TOKEN_PARAM, token).build()
 				.toUriString();
-		response.addHeader("auth_token", token);
 		getRedirectStrategy().sendRedirect(request, response, redirectionUrl);
 	}
 }

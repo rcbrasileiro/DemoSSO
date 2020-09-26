@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.client.web.HttpSessionOAuth2Authoriza
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.rcbrasileiro.demosso.security.filter.JwtAuthenticationFilter;
 import com.rcbrasileiro.demosso.security.oauth2.CustomAuthenticationSuccessHandler;
 
 @Configuration
@@ -63,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Appl
 				.successHandler(customAuthenticationSuccessHandler);
 
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
-
+		http.cors();
 	}
 
 	@Bean
