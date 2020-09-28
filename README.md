@@ -25,3 +25,23 @@ These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 
+### Run application
+To run the project, access its directory and run the following command:
+```
+// Windows
+./gradlew.bat clean bootRun
+
+//Linux
+.\gradlew clean bootRun
+```
+
+## Tests
+Tests can be performed similarly to standard execution using the commands
+```
+// Windows
+./gradlew.bat clean test
+
+//Linux
+.\gradlew clean test
+```
+
